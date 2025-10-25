@@ -1,0 +1,1 @@
+Este documento pretende facilitar la divulgación e investigación histórica. El código intenta imitar el formato original de la revista, por lo que puede servir como base guía en ideas para otros trabajos en Latex
