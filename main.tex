@@ -5,10 +5,7 @@
 \usepackage{pgfornament}
 \usepackage{lettrine}
 \usepackage{mathpazo}
-\usepackage{lipsum} % Solo para generar texto de ejemplo
 \usetikzlibrary{calc}
-
-% --- AJUSTES ESTÉTICOS DE MÁRGENES ---
 \usepackage{geometry}
 \geometry{
     a4paper,
@@ -25,59 +22,47 @@
   \addtocounter{footnote}{-1}%
   \endgroup
 }
-% Definir un nuevo comando para el cuadro decorativo
+% Esto sirve para el cuadro decorativo
 \newcommand{\decorativeTitle}[3]{
-    % 1. Iniciamos un entorno que nos permite desplazar el contenido
     \begin{list}{}{
-        % 2. Aplicamos un margen izquierdo negativo para desplazar todo hacia la izquierda
-        \setlength{\leftmargin}{-0.55cm} % <-- VALOR DE DESPLAZAMIENTO A LA IZQUIERDA
+        \setlength{\leftmargin}{-0.55cm}
         \setlength{\rightmargin}{0cm}
         \setlength{\topsep}{0pt}
         \setlength{\partopsep}{0pt}
     }
-    \item % Iniciamos el item para aplicar el desplazamiento
+    \item 
     \begin{center}
-        % Cuadro decorativo con un borde grueso
         \begin{tikzpicture}[
             every node/.style={inner sep=0pt},
-            % Puedes ajustar el color de los ornamentos aquí
-            % pgfornamentstyle/.style={color=black, fill=black} 
         ]
         % Título dentro del cuadro
         \node [text width=14cm, outer sep=1.2cm, text centered, color=black] (Greeting)
         { 
             \Huge \textbf{\uppercase{#1}} \\[10pt] % Título en mayúsculas
-            \Large {#2} \\[10pt] % Subtítulo (opcional)
-            \small \textit{#3} % Número (opcional)
+            \Large {#2} \\[10pt] % Subtítulo 
+            \small \textit{#3} % Número
         };
-
-        % Colocamos ornamentos en las esquinas del cuadro
         \foreach \corner/\sym in {north west/none, north east/v, south west/h, south east/c} {
             \node [anchor=\corner] (\corner) at (Greeting.\corner) {\pgfornament[width=2cm, symmetry=\sym]{63}};
         }
 
-        % Ornamento en los lados verticales
         \path (north west) -- (south west)
         node [midway, anchor=east] {\pgfornament[height=2cm]{9}}
         (north east) -- (south east)
         node [midway, anchor=west] {\pgfornament[height=2cm, symmetry=v]{9}};
-
-        % Líneas ornamentales horizontales en la parte superior e inferior
         \pgfornamenthline{north west}{north east}{north}{89}
         \pgfornamenthline{south west}{south east}{south}{89}
         \end{tikzpicture}
     \end{center}
-    \end{list} % 3. Cerramos el entorno list para que el resto del texto no se vea afectado
+    \end{list} 
 }
 
 \begin{document}
-
-% Título principal con cuadro decorativo
 \decorativeTitle{Mercurio Peruano}{DEL DÍA 2 DE AGOSTO DE 1792}{Núm. 165}\blfootnote{Transcripción realizada por \emph{Ronald Eduardo Portocarrero Hoyos} con fines de divulgación. No se reclama autoría sobre la obra original.}
 \begin{center}
     \Large{\textbf{\textsc{Descripción corográfica de la provincia de }\emph{Chachapoyas}}}
 \end{center}
-% Espacio para contenido adicional
+
 \lettrine[lines=2,loversize=0.2]{S}{i} la edad de oro fue aquella tan celebrada de los Poetas en que todo era común, y en que las gentes del antiguo Lacio recogían los frutos más sabrosos y abundantes, sin cultivar los campos, ni manejar el corvo arado; fue sin duda la más infeliz en que han vivido los mortales. Ellos contentos con esos agrestes alimentos vivirían independientes, y procurando conservar esa fantástica prerrogativa multiplicarían sus necesidades y miserias. Aislados en una selva pasarían el tiempo con fastidio, y gozando de una felicidad que no sabían disfrutar, aspirarían ansiosos a otros placeres que ellos no podían conocer sin la dependencia mutua, y los vínculos de la sociedad. La mania común, de ensalzar lo antiguo aunque merezca el vituperio, hizo que se mirasen como felices aquellos tiempos en que el más distinguido se vestía de pieles, y se alimentaba de bellotas, y sin mas derecho que su fuerza exterminaba á sus semejantes. Solo las leyes de Saturno pudieron hacer á aquellos hombres mas libres haciéndolos dependientes; y las monedas que introduxó, dándoles a conocer el precio de las cosas, fueron el móvil de su fortuna. Aprendiendo á darles el uso respectivo empezaron á ver un teatro muy diverso. Se promueve el comercio, se minora la ferocidad y la barbarie, y la santa amistad hace patentes sus delicias; las selvas luego se convierten en Ciudades, y ya son útiles los hombres que ántes se devoraban mutuamente.
 
 
