@@ -1,0 +1,145 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{pgfornament}
+\usepackage{lettrine}
+\usepackage{mathpazo}
+\usepackage{lipsum} % Solo para generar texto de ejemplo
+\usetikzlibrary{calc}
+
+% --- AJUSTES ESTÉTICOS DE MÁRGENES ---
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    top=1.5cm,
+    bottom=2cm,
+    left=2.5cm,
+    right=2.5cm,
+    includeheadfoot
+}
+% -----------------------------------------------------------
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+% Definir un nuevo comando para el cuadro decorativo
+\newcommand{\decorativeTitle}[3]{
+    % 1. Iniciamos un entorno que nos permite desplazar el contenido
+    \begin{list}{}{
+        % 2. Aplicamos un margen izquierdo negativo para desplazar todo hacia la izquierda
+        \setlength{\leftmargin}{-0.55cm} % <-- VALOR DE DESPLAZAMIENTO A LA IZQUIERDA
+        \setlength{\rightmargin}{0cm}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+    }
+    \item % Iniciamos el item para aplicar el desplazamiento
+    \begin{center}
+        % Cuadro decorativo con un borde grueso
+        \begin{tikzpicture}[
+            every node/.style={inner sep=0pt},
+            % Puedes ajustar el color de los ornamentos aquí
+            % pgfornamentstyle/.style={color=black, fill=black} 
+        ]
+        % Título dentro del cuadro
+        \node [text width=14cm, outer sep=1.2cm, text centered, color=black] (Greeting)
+        { 
+            \Huge \textbf{\uppercase{#1}} \\[10pt] % Título en mayúsculas
+            \Large {#2} \\[10pt] % Subtítulo (opcional)
+            \small \textit{#3} % Número (opcional)
+        };
+
+        % Colocamos ornamentos en las esquinas del cuadro
+        \foreach \corner/\sym in {north west/none, north east/v, south west/h, south east/c} {
+            \node [anchor=\corner] (\corner) at (Greeting.\corner) {\pgfornament[width=2cm, symmetry=\sym]{63}};
+        }
+
+        % Ornamento en los lados verticales
+        \path (north west) -- (south west)
+        node [midway, anchor=east] {\pgfornament[height=2cm]{9}}
+        (north east) -- (south east)
+        node [midway, anchor=west] {\pgfornament[height=2cm, symmetry=v]{9}};
+
+        % Líneas ornamentales horizontales en la parte superior e inferior
+        \pgfornamenthline{north west}{north east}{north}{89}
+        \pgfornamenthline{south west}{south east}{south}{89}
+        \end{tikzpicture}
+    \end{center}
+    \end{list} % 3. Cerramos el entorno list para que el resto del texto no se vea afectado
+}
+
+\begin{document}
+
+% Título principal con cuadro decorativo
+\decorativeTitle{Mercurio Peruano}{DEL DÍA 2 DE AGOSTO DE 1792}{Núm. 165}\blfootnote{Transcripción realizada por \emph{Ronald Eduardo Portocarrero Hoyos} con fines de divulgación. No se reclama autoría sobre la obra original.}
+\begin{center}
+    \Large{\textbf{\textsc{Descripción corográfica de la provincia de }\emph{Chachapoyas}}}
+\end{center}
+% Espacio para contenido adicional
+\lettrine[lines=2,loversize=0.2]{S}{i} la edad de oro fue aquella tan celebrada de los Poetas en que todo era común, y en que las gentes del antiguo Lacio recogían los frutos más sabrosos y abundantes, sin cultivar los campos, ni manejar el corvo arado; fue sin duda la más infeliz en que han vivido los mortales. Ellos contentos con esos agrestes alimentos vivirían independientes, y procurando conservar esa fantástica prerrogativa multiplicarían sus necesidades y miserias. Aislados en una selva pasarían el tiempo con fastidio, y gozando de una felicidad que no sabían disfrutar, aspirarían ansiosos a otros placeres que ellos no podían conocer sin la dependencia mutua, y los vínculos de la sociedad. La mania común, de ensalzar lo antiguo aunque merezca el vituperio, hizo que se mirasen como felices aquellos tiempos en que el más distinguido se vestía de pieles, y se alimentaba de bellotas, y sin mas derecho que su fuerza exterminaba á sus semejantes. Solo las leyes de Saturno pudieron hacer á aquellos hombres mas libres haciéndolos dependientes; y las monedas que introduxó, dándoles a conocer el precio de las cosas, fueron el móvil de su fortuna. Aprendiendo á darles el uso respectivo empezaron á ver un teatro muy diverso. Se promueve el comercio, se minora la ferocidad y la barbarie, y la santa amistad hace patentes sus delicias; las selvas luego se convierten en Ciudades, y ya son útiles los hombres que ántes se devoraban mutuamente.
+
+
+Tal fue el principio de las Sociedades\footnote{Aunque es incontestable que desde el origen del mundo hubo Sociedades arregladas ya baxo del primer Padre de los mortales, ya baxo de los Patriarcas sus descendientes; con todo cualquiera que no sea peregrino en la Historia confesará, que en los tiempos sucesivos llegaron algunos hombres y sus pósteros á tal decadencia, que apenas parecían racionales por el semblante y por ciertos vestigios de razón; y que de estado tan fatal han salido solo por los medios que ha proporcionado la providencia}, y el medio que las condujo a tan alto grado de opulencia. Sin estos dos resortes no prosperan; pues sin las leyes se violan los derechos de la humanidad; y no se promueve la industria, y sin la moneda, aunque aquéllas vengan á su auxilio, esta se amortigua: así los más feraces territorios que carecen de esta última ventaja, no salen de su pobreza, ni pueden hacer útiles los dones que con prodigalidad les franquea la naturaleza.
+
+Entre estos se debe enumerar la Provincia de  \emph{Chachapoyas} de la Intendencia de Truxillo, sumamente fértil y abundante, y en donde parece derramó el Criador todos sus tesoros. Su jurisdicción se extiende de E. a O. más de 140 leguas, y de N. á S. más de 50. Comprende las Provincias de Luya, Moyobamba y Lamas, situadas al N. del Marañón, y confinantes por el mismo rumbo con Montañas incógnitas de Infelices, por el N. O. con la Provincia de Jaén, por el S. con la de Caxamarca, por el S. O. con la de Caxamarca de Pátas, y al E. con las Misiones de Maynas de la Presidencia de Quito.
+
+La Provincia de \emph{Chachapoyas} se divide en 9 Curatos, cuales son, el de su nombre, Levanto, la Jalca, Cheto, Olleros, Chilliquin, Chisquilla, Yambrasbamba y Corobamba.
+
+
+El de \emph{Chachapoyas} tiene por matriz á la Ciudad de este mismo nombre\footnote{Se deriva de \emph{Sachapullo} que quiere decir \emph{monte de nubes} por las muchas que apecieron, donde yace la ciudad, al tiempo fundarse}, una de las mas antiguas, fundada por algunos Conquistadores que cansados de los trabajos de Marte escogieron este suelo para pasar tranquilos los días restantes de su vida. Su clima es muy benigno, pues allí se goza de una continua primavera, conservando los árboles en todo el año sus hojas, flores y frutos. Tiene el título de muy noble y leal, por haber sido fiel á la Corona en las alteraciones del Reyno, y es gobernada por un Subdelegado de Intendente. En tiempos anteriores hacia mas figura en el Mapa político de esa América meridional; pues tenía Cajas Reales y todos los Oficiales de Rentas públicas: ahora solo subsiste la administración del Tabaco, y de otras rentas de S. M. con sus respectivos Oficiales y subalternos. Existen en ella varias Iglesias como la Parroquial, cuyo Patron y titular es San Juan Bautista, dos ayudas de Parroquia, y una Capilla nombradas San Lázaro, Santa Ana, y Burgos, y los Conventos de San Francisco, la Merced, y Belen. Comprende esta feligresía algunos anexos que distan de ella de una á cinco leguas.
+
+
+\emph{Levanto}\footnote{Este nombre le viene de haberse levantado de allí los Conquistadores algunos años después de su establecimiento, por que les pareció mejor el terreno donde está y fundaron la ciudad de \emph{Chachapoyas}} situado al S. de \emph{Chachapoyas}, dista de allí tres leguas, y en él se venera una milagrosa imágen de María Santisima, que los Conquistadores conduxeron desde España. Tiene tres anexos nombrados \emph{Colcamar, Huancas} y \emph{Sonche}, que rodean la Ciudad á distancia de pocas leguas. En \emph{Colcamar} curten suelas, en \emph{Sonche} fabrican ollas y tejas, y en los otros dos Pueblos se exercitan sus habitantes en la labranza del Campo.
+
+Confina con el antecedente la \emph{Jalca}, cuyo Cura es Religioso Mercedario. Sus anexos son el Tambo de Suta, donde hay un resguardo de S.M. para evitar las extracciones ilícitas de tabaco, y los Pueblos de la Magdalena y San Cristoval. Sus naturales por lo regular son arrieros y labradores.
+
+\emph{Cheto} se halla á las siete leguas de la Capital, y tiene tres anexos bastante infelices y despoblados. Á la una legua de distancia está el de \emph{Soloco}, á las dos el de \emph{Chelel}, y el de \emph{Cochamal} á las doce, que contienen mucho tránsitos y rios peligrosos. Este último se halla en el valle del \emph{Huayabamba} que es de buen temperamento, y se dilata a mas de diez y seis leguas hasta el Huambo, Pueblecito de Conversiones de Religiosos Franciscos muy avanzado á la Montaña.
+
+\emph{Olleros} colocado al N. de Chachapoyas contiene un terreno rodeado de páramos y cordilleras frías y elevadas, é inundado de muchos rios que corren por las quebradas que hay entre sus Pueblos, de suerte que estos en tiempo de aguas son intransitables. Sus anexos son \emph{Taulia, Diosan, Yambajalca, Casmal}, distantes quando mas cinco leguas de su matriz, y Mian\footnote{\texttt{Nota del editor:} El documento original no es del todo legible, peco de desconocer un nombre que se asemeje por lo que esta asignación es tentativa} á las veinte en \emph{Huayabamba}. Este se halla bien poblado de gente blanquera que hace su comercio con excelentes azúcares, tabaco, y muchos mantenimientos. Solo tiene un camino por donde se há de ir y venir precisamente, muy áspero, cenagoso y regado de infinitos rios; por lo que sus moradores no se calzan, pues de otra suerte contraen enfermedades. Allí son copiosas las lluvias; furiosos los uracanes, é impetuosas las tormentas de truenos y rayos que consumen los vivientes y sus casas. Las gentes de los otros Pueblos crían algun ganado vacuno y lanar, cosechan papa, ocas, maiz y varias semillas, é igualmente trafican con tabaco y otros frutos.
+
+\emph{Chilliquin} linda con el anterior, y tiene por anexos á distancia de seis leguas poco más ó menos á \emph{Quinjalca, Vitúa, Cuelebo y Yurumarca}, en donde se trabajan unas Minas de sal de que se abastecen esta Provincia, y las de \emph{Caxamarca y Jaen}
+
+\emph{Chisquilla} muy reducido, tanto por el corto número de habitantes, como por estar á la entrada de la Montaña, tiene sus Pueblos á pocas cuadras unos de otros. El clima es bien templado, y sus naturales se ejercitan en la labor del campo y arriería. 
+
+\emph{Yambrasbamba} situado también en la Montaña, y distante ocho leguas de \emph{Chisquilla} es de muy corto vecindario, y tiene por anexos á \emph{Yapa} y \emph{Chirta}.
+
+\emph{Corobamba} confinante con \emph{Jaen} y la Montaña incógnita, es de un temperamento sumamente frígido. En este Pueblo hay dos cuevas fabricadas por la misma naturaleza tan espaciosas que en cada una caben cincuenta hombres con sus lanzas levantadas. Sus anexos son \emph{Sipaspamba y Pomacocha}, y en el primero que es de buen temple, hay una famosa laguna de más de siete leguas de largo, en donde se crían algunos peces, y en cuyas orillas nacen muchas totoras, de las que tejen esterás. Hay también en él varios manantiales de agua salobre que cocinada en ollas se coagula, y dexa una sal muy dura y blanca. Se recogen de los campos de esta Doctrina sazonadas frutas, abundantes mantenimientos, mucho tabaco bracamoro, azucar, raspaduras, y aguardiente extraidos de la caña dulce que benefician.
+
+La provincia de \emph{Luya} se compone de seis Curatos; el de su nombre, \emph{Olto, Santo Tomas, las Balsas, Yamon} y \emph{Bagua}.
+
+A distancia de cinco leguas de la Ciudad de \emph{Chachapoyas} está la matriz del primero en el Valle de \emph{Jucusbamba} ó \emph{Lamud}, al que riega y fecunda un rio que pasa por medio de él; por esta razón es el granero de donde se abastece aquella Capital de trigo, cebada, maíz y otras semillas. Sus anexos son \emph{Luya}, Capital de la Provincia de este nombre y de los \emph{Chilaos, Cuemal, Paclas, Quispi, Bilaya}, y las haciendas del \emph{Tambillo} y \emph{Dunia}. Estos dos últimos distan mucho de la Parroquial; pues el primero está á las veinte leguas de intransitables caminos, en \emph{Chilaos}, y el segundo á las diez y seis de peores tránsitos, y rios sumamente peligrosos. El temperamento del Valle es muy benigno, por lo que moran en él muchos de los otros Pueblos de la Doctrina.
+
+\emph{Olso} distante una legua al O. del anterior, tiene dos anexos \emph{San Gerónimo} y \emph{Chosgon}, y varias haciendas de poca entidad, en las que se cosechan tabaco y caña dulce. 
+
+\emph{Santo Tomas} linda con \emph{Luya}, y tiene minas de oro, de las que se sacan bastantes castellanos. Sus anexos, \emph{San Idelfonso}, el \emph{Tingo}, desde donde hasta el Valle de \emph{Sesuya}, dirigiéndose al O. hay doce leguas de caminos muy fragosos; \emph{Ocumal} Vice-parroquia, y el Pueblo de \emph{Mendan}, siendo necesario dar una vuelta de cuarenta leguas para llegar a la matriz por caminos muy ásperos, rios peligrosos y punas frígidas. En el Valle hay crecido número de gente blanca y muchas haciendas, en las que se recoge tabaco, caña dulce, plátanos, yucas, y varias semillas.
+
+Las \emph{Balsas}, Puerto Real por donde pasan el \emph{Marañon} pagando dos reales de flete por cada carga, es resguardo para precaver las extracciones de tabaco, y tiene minas de oro. El calor que allí se experimenta es excesivo, y sus habitantes son indios y mestizos. A las catorce leguas de caminos muy fragosos tiene por anexo el Pueblo de \emph{Uchumarca}, á las ocho el de \emph{Chiquibamba} en \emph{Chachapoyas}, á las diez y seis la hacen la de \emph{Cochabamba} y el asiento de \emph{Leymebamba}, y á las siete de este el Pueblo de \emph{San Pedro}. Confina esta Doctrina al E. con \emph{Caxamarquilla}, y al N. con los Curatos de \emph{Santo Tomás}, \emph{la Jalca} y el río Marañon.
+
+ \emph{Yamon} se dilata en los \emph{Chillaos} sobre quarenta leguas, separándolo un rio del Valle de \emph{Sesuya}. Sus anexos son \emph{Quispis}. \emph{Lomya}, \emph{Cumba, Balcho} en la jurisdicción de  \emph{Chachapoyas}, \emph{Pimpincos} á la otra banda del \emph{Marañón} en el territorio de \emph{Jaen}, y las haciendas de \emph{Cococho} y \emph{Cocochillo}. Los mas de sus moradores son blancos que crian algun ganado mular, y cosechan tabaco, cacao y achiote.
+
+\emph{Bagua} contigua con la Doctrina anterior tiene sus Pueblos al N. del Marañon. Estos son \emph{Bagua grande}, \emph{Jomalca}, las haciendas del Pintor, \emph{Chirigua}, \emph{Collesate}, la \emph{Coca}, \emph{Timorbamba}, \emph{Nuña}, \emph{Limenlegia} en un terreno de veinte leguas de temperamentos muy ardientes y nocivos á la salud: así los habitantes son unos pocos mestizos y raro el indio, pues qualquiera de ellos que entra, luego muere. Estas gentes son muy dadas al ocio tanto por el sumo calor, como por lo pródigo de la tierra que produce abundancia de plátanos, raises y carnes con que se alimentan. Comercián con sebo, ganado vacuno y mular, algodon, cascatilla, brasil, zarza, cera negra y otras varias especies.
+
+La Provincia de \emph{Moyobamba} se reduce á solo dos Curatos; el primero su nombre, y el segundo \emph{Soritor}.
+
+Aquel no tiene mas Pueblo que la Ciudad de Santiago de los Valles situada en un llano tan dilatado que hace horisonte sin que se distinga cerro alguno. El terreno es montuoso, muy húmedo, y lleno de ciénegas á causa de los muchos rios caudalosos que lo inundan. Tiene algunas Haciendas de poca consideracion no obstante ser la tierra tan fecunda, que sin la menor fatiga recogen sus naturales tantos plátanos, raises, semillas y frutas, que ademas de alimentarse con ellas, cambian por harinas, tasajos y cecinas de \emph{Chachapoyas}, pues ni cosechan trigo, ni pueden conservar algun ganado por los muchos tigres que lo devoran, y por los \emph{Subyacuros} especie de gusanos que introducidos entre cuero y carne de las reses, las consumen. Por esta razon están siempre ansiosos de carne, de suerte que quando la consiguen de mono de los muchos que se crian en aquella Montaña, se dan los parabienes de un buen dia. En dicha ciudad ademas del Cura hay uno ú otro eclesiástico, algunos españoles, mucha gente blanca, y pocos indios. Su destino comun es extraer caldos de la caña que siembran, hacer hilados del mucho algodon que recogen, y texer tocuyos, lonas y listados pintados con las yerbas de aquellos montes. Se visten con estos mismos texidos, y solo apetecen algunos la ropa de Castilla para los dias festivos. Su comercio consiste en estos efectos, en almendras, cacao, caraña, achiote, aceyte de maria, bálsamo de canime, veneno para los cazadores, cera de pellinque, estoraque y buen tabaco, que dexan cada año de ocho á diez mil pesos.
+
+\emph{Soritor} Doctrina bien infeliz, dista seis leguas de la antecedente, y tiene por anexos los Pueblos de \emph{Yrarani}, \emph{Yantulos}, \emph{Nijaque} avisado, y el asiento de \emph{Uquiguani} con pocos naturales que cosechan algodon y tabaco, y se mantienen de la cacería de monos, loros y otros páxaros.
+
+La Provincia de los \emph{Lamas} situada en lo interior de la Montaña dista de la de \emph{Moyobamba} quarenta leguas de caminos peligrosos y despoblados. El año de 1650 la conquistó el General\footnote{Mercurio Peruano Número 81, pag.114.}\ Don Martin de la Riba; y no obstante el largo tiempo que ha corrido pasa por \emph{Conversion}, por lo que sus naturales no pagan tributo. Sus Curatos son la Ciudad del Triunfo de la Santa Cruz de los motilones\footnote{Le viene esta denominación de que sus naturales quando fueron conquistados, usaban el pelo corto, y aún ahora lo tienen por costumbre, pintándose los rostros de negro y colorado} de \emph{Lamas}, \emph{Tarapoto} y \emph{Cumbaza}. Aquella Ciudad yace en una ladera cortada de varias barrancas que la hacen incómoda, y de una figura irregular, estando circundada al mismo tiempo de los rios de \emph{Huánuco} y \emph{Moyobamba}, y sus anexos son \emph{Tobalosos}, y \emph{San Miguel del Rio}.
+
+Aquí está la transcripción del texto:
+
+El segundo, y tercer Curato eran tambien anteriormente sus anexos: pero como se ha dicho en otra parte\footnote{Mercurio Peruano número 60, pag. 235 y 236}, por representacion que hicieron sus vecinos al Superior Gobierno se entregaron el año pasado de 89 á los Padres Misioneros de Ocopa.
+
+El comercio de esta Provincia se reduce al expendio de las mismas manufacturas de algodon que se trabajan en \emph{Moyobamba}.
+
+Esta grande extension de tierras despobladas y desiertas, rodeadas de cordilleras y de enmarañados montes, es el quadro mas hermoso en donde la naturaleza ostenta sus primores multiplicando los contrastes. Aquí el tigre audaz hace resonar las selvas con sus bramidos, destroza los ganados, é insulta al bravo leon, y al oso furibundo: allí la \emph{Guangana} ó \emph{javalí}, el venado, y otras muchas fieras son la presa del cientopies y de las volantes vívoras que acaban con sus vidas, y las de los racionales que transitan: allá aparecen las marimondas, y los monos negros y blancos, que agraciados y traviesos imitan muchas acciones de los hombres: acá se ven las \emph{Dantas}\footnote{Conocidas baxo el nombre de \emph{Gran-bestia}. Representan un mixto de camello y venado, y son quasi del tamaño de este. Su cabeza y sus orejas son grandes, y el labio superior es tan largo que les embaraza para comer, lo que executan andando ácia atras: su cola es corta, y las uñas hundidas, y solo el macho tiene cuernos. Padecen continuamente el mal caduco, del que sanan introduciendo en la oreja la uña del pie derecho por lo que se aprecian para curar esta enfermedad los anillos que se forman en los trozos de ella. Su carne es tan sabrosa como la de la vaca.}, el \emph{Caucbul},\footnote{) Se particulariza entre todos los quadrúpedos en el modo de concebir; pues la hembra tiene un seno á manera de bolsa en lo exterior del vientre, donde se engendran sus hijos, y están á la vista haciendo varios movimientos}y el \emph{Zorrillo} \footnote{Se dice que su corazon tiene la virtud de curar el dolor de costado.}, que lejos de destruir á los mortales suelen servirles de alivio, de alimento y de recreo.
+\\
+
+\begin{flushright}
+    \emph{Se concluirá en el Mercurio siguiente}
+\end{flushright}
+
+\end{document}
